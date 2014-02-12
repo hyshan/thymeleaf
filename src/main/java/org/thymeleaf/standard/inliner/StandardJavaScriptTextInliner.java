@@ -31,26 +31,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class StandardJavaScriptTextInliner extends AbstractStandardScriptingTextInliner {
 
-
     public static final StandardJavaScriptTextInliner INSTANCE = new StandardJavaScriptTextInliner();
 
+    private final ObjectMapper mapper = new ObjectMapper();
 
     private StandardJavaScriptTextInliner() {
         super();
     }
 
-
-
-
     @Override
     protected String formatEvaluationResult(final Object result) {
-        ObjectMapper mapper = new ObjectMapper();
         try {
             return mapper.writeValueAsString(result);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
     }
-
-
 }
